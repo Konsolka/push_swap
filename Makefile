@@ -1,48 +1,69 @@
 NAME_CHECKER	= checker
-NAME_PUSH_SWAP	= push_swap
+NAME_PS	= push_swap
 
 # compiler
 
 CC		= gcc
 CFLAGS	= -Wall -Wextra -g
 
-SRC_CHECKER		= main.c lst_work.c commands.c
+# colors
 
-OBJ_CHECKER		= $(addprefix $(OBJDIR_CHECKER),$(SRC_CHECKER:.c=.o))
+RED		:= "\033[31m"
+WAVE	:= "\033[36m"
+EOC		:= "\033[0m"
+BLINK	:= "\033[5m"
+GREEN	:= "\033[32m"
+
+# srcs and obj
+
+SRC_CHECKER		= main_checker.c lst_work.c commands.c
+SRC_PUSH		= main_push_swap.c lst_work.c
+
+OBJ_CHECKER		= $(addprefix $(OBJDIR),$(SRC_CHECKER:.c=.o))
+OBJ_PUSH		= $(addprefix $(OBJDIR),$(SRC_PUSH:.c=.o))
+
 
 # directories
+INCDIR			= ./includes/
+
+SRC_DIR			= ./srcs/
+
 OBJDIR			= ./obj/
-SRCDIR_CHECKER	= ./srcs/checker/
-INCDIR	= ./includes/
-OBJDIR_CHECKER	= ./obj/checker/
 
 # ft library
-FT		= ./libft/
-FT_LIB	= $(addprefix $(FT),libft.a)
-FT_INC	= -I ./libft/includes
-FT_LNK	= -L ./libft -l ft
+FT				= ./libft/
+FT_LIB			= $(addprefix $(FT),libft.a)
+FT_INC			= -I ./libft/includes
+FT_LNK			= -L ./libft -l ft
 
-EXEC = main
 
-all: obj $(FT_LIB) $(NAME_CHECKER)
+all: obj $(FT_LIB) $(NAME_CHECKER) $(NAME_PS)
 
 obj:
-	mkdir -p $(OBJDIR_CHECKER)
+	@echo " - Creating dir $(OBJDIR)"
+	@mkdir -p $(OBJDIR)
 
-$(OBJDIR_CHECKER)%.o:$(SRCDIR_CHECKER)%.c
-	$(CC) -g $(CFLAGS) $(FT_INC) -I $(INCDIR) -o $@ -c $<
+$(OBJDIR)%.o:$(SRC_DIR)%.c
+	@echo $(WAVE) " - Compiling $<  ->  $@" $(EOC)
+	@$(CC) -g $(CFLAGS) $(FT_INC) -I $(INCDIR) -o $@ -c $<
 
 $(FT_LIB):
-	make -C $(FT)
+	@make -C $(FT)
 
 $(NAME_CHECKER): $(OBJ_CHECKER)
-	$(CC) $(OBJ_CHECKER) $(FT_LNK) -o $(NAME_CHECKER)
+	@echo $(GREEN) " - Compiling $@" $(EOC)
+	@$(CC) $(OBJ_CHECKER) $(FT_LNK) -o $(NAME_CHECKER)
+
+$(NAME_PS): $(OBJ_PUSH)
+	@echo $(GREEN) " - Compiling $@" $(EOC)
+	@$(CC) $(OBJ_PUSH) $(FT_LNK) -o $(NAME_PS)
 
 clean:
-	rm -rf $(OBJDIR) $(NAME_CHECKER)
+	rm -rf $(OBJDIR)
 
 fclean: clean
 	rm -rf $(NAME_CHECKER)
+	rm -rf $(NAME_PS)
 	make -C $(FT) fclean
 
 re: fclean all

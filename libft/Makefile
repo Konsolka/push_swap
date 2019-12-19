@@ -6,7 +6,7 @@
 #    By: mburl <mburl@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/04 19:30:25 by mburl             #+#    #+#              #
-#    Updated: 2019/12/05 11:33:50 by mburl            ###   ########.fr        #
+#    Updated: 2019/12/19 13:12:12 by mburl            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,17 +36,25 @@ SRCS	= ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 
 OBJ		= $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 
+# color
+WAVE	:= "\033[36m"
+EOC		:= "\033[0m"
+GREEN	:= "\033[32m"
+
 all: obj $(NAME)
 
 obj:
-	mkdir -p $(OBJDIR)
+	@echo " - Creating dir $(OBJDIR)"
+	@mkdir -p $(OBJDIR)
 
 $(OBJDIR)%.o:$(SRCSDIR)%.c
+	@echo $(WAVE) " - Compiling $<  ->  $@" $(EOC)
 	@$(CC) $(CFLAGS) -I $(INCDIR) -o $@ -c $<
 
 $(NAME): $(OBJ)
+	@echo $(GREEN) " - Running $@" $(EOC)
 	@ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+	@ranlib $(NAME)
 
 clean:
 	@rm -rf $(OBJDIR)
