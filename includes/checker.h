@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 16:19:21 by mburl             #+#    #+#             */
-/*   Updated: 2019/12/19 15:13:58 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/20 17:53:03 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/uio.h>
 # include <unistd.h>
 
+# define ARR_DATA(D) *(int *)(D)->content
 typedef struct	s_data
 {
 	int		size;
@@ -34,5 +35,7 @@ void	run_push(t_list **lst, t_list **lst_b);
 void	run_reverse(t_list **lst);
 void	run_line(t_list **lst);
 void	ft_lst_data_add(t_data **data, t_list *lst);
+void	ft_lst_free(t_list *lst);
+int		pw_stack_size(t_list *lst);
 
 #endif

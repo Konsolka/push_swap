@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 16:01:00 by mburl             #+#    #+#             */
-/*   Updated: 2019/12/19 12:55:14 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/20 16:43:04 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,12 @@ int		main(int ac, char **av)
 	lst_a = NULL;
 	lst_b = NULL;
 	ac -= 1;
+	if (ac < 1)
+	{
+		printf("%7s./checker number\n%7s\
+./checker first_number ... last_number\n", "usage: ", "");
+		ft_exit("", lst_a, lst_b);
+	}
 	while (ac > 0)
 	{
 		i = 0;
@@ -136,6 +142,7 @@ int		main(int ac, char **av)
 	}
 	reading_commands(&lst_a, &lst_b);
 	check_stack(lst_a, lst_b);
-	ft_exit("", lst_a, lst_b);
+	ft_lst_free(lst_a);
+	ft_lst_free(lst_b);
 	return (0);
 }

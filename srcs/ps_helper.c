@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_work.c                                         :+:      :+:    :+:   */
+/*   ps_helper.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/16 16:23:09 by mburl             #+#    #+#             */
-/*   Updated: 2019/12/20 15:50:25 by mburl            ###   ########.fr       */
+/*   Created: 2019/12/20 17:11:01 by mburl             #+#    #+#             */
+/*   Updated: 2019/12/20 17:11:49 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void	ft_lst_free(t_list *lst)
+int		pw_stack_size(t_list *lst)
 {
-	t_list	*temp;
+	int		i;
+
+	i = 0;
 	while (lst)
 	{
-		free(lst->content);
-		lst->content = NULL;
-		temp = lst;
 		lst = lst->next;
-		free(temp);
+		i++;
 	}
-}
-
-void	ft_exit(char *str, t_list *lst, t_list *lst_b)
-{
-	ft_lst_free(lst);
-	ft_lst_free(lst_b);
-	ft_putstr_err(str);
+	return (i);
 }
