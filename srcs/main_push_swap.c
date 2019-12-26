@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 12:42:45 by mburl             #+#    #+#             */
-/*   Updated: 2019/12/20 19:23:44 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/26 14:19:39 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ int		main(int ac, char **av)
 {
 	t_list		*lst_a;
 	t_list		*lst_b;
-	t_data		data;
 	int			temp;
 	int			i;
 	int			runs;
