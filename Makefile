@@ -17,7 +17,7 @@ GREEN	:= "\033[32m"
 # srcs and obj
 
 SRC_CHECKER		= main_checker.c lst_work.c commands.c
-SRC_PUSH		= main_push_swap.c lst_work.c commands.c ps_helper.c ps_helper_2.c
+SRC_PUSH		= main_push_swap.c pw_backtrack.c pw_backtrack_2.c pw_helper.c pw_helper_1.c pw_helper_2.c pw_sort.c
 
 OBJ_CHECKER		= $(addprefix $(OBJDIR),$(SRC_CHECKER:.c=.o))
 OBJ_PUSH		= $(addprefix $(OBJDIR),$(SRC_PUSH:.c=.o))
