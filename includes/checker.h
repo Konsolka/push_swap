@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 16:19:21 by mburl             #+#    #+#             */
-/*   Updated: 2019/12/26 14:20:45 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/09 09:20:01 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define WIDTH 500
 # define HIEGHT 1000
 # define ARR_DATA(D) *(int *)(D)->content
-
+# define ARR_DATA_A(D) (D)->a->val
 typedef	struct	s_mlx
 {
 	void	*win;
@@ -32,9 +32,28 @@ typedef	struct	s_mlx
 
 typedef struct	s_stack
 {
-	int		data;
-	int		w;
+	int				val;
+	int				i;
+	int				sort;
+	struct s_stack	*next;
 }				t_stack;
+
+typedef struct	s_pw_stack
+{
+	t_stack		*a;
+	t_stack		*b;
+	t_stack		*max_sort;
+	int			len_a;
+	int			len_b;
+	int			opt_a;
+	int			opt_b;
+	int			opt_pl;
+	int			temp_a;
+	int			temp_b;
+	int			temp_pl;
+	int			print;
+	int			flag_v;
+}				t_pw_stack;
 
 typedef struct	s_check
 {
@@ -53,11 +72,13 @@ void	run_swap(t_list **lst);
 void	run_push(t_list **lst, t_list **lst_b);
 void	run_reverse(t_list **lst);
 void	run_line(t_list **lst);
-void	ft_lst_data_add(t_data **data, t_list *lst);
 void	ft_lst_free(t_list *lst);
 int		pw_stack_size(t_list *lst);
 t_list	*find_smallest_num(t_list *lst);
 void	find_min_max(t_list *lst, int *min, int *max);
-t_list	*hold_first(t_list *lst, int min, int max, int i, t_list *node);
+t_pw_stack		*pw_create_stack(int ac, char **av);
+int				pw_get_len(t_stack *st);
+t_stack			*pw_get_last_node(t_stack *st);
+t_stack			*pw_create_new_node(int val);
 
 #endif
